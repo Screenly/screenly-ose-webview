@@ -43,3 +43,5 @@ browser_bus = bus.get('screenly.webview', '/Screenly')
 
 browser_bus.loadPage("www.example.com")
 ```
+
+Supported protocols: `http://`, `https://`

@@ -14,13 +14,13 @@ int main(int argc, char *argv[])
     QApplication::changeOverrideCursor(cursor);
 
     MainWindow *window = new MainWindow();
-    window -> show();
+    window->show();
 
     QDBusConnection connection = QDBusConnection::sessionBus();
 
     if (!connection.registerObject("/Screenly", window,  QDBusConnection::ExportAllSlots))
     {
-        qWarning() << qPrintable("Can't register object");
+        qWarning() << "Can't register object";
         return 1;
     }
     qDebug() << "WebView connected to D-bus";
