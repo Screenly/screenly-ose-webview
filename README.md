@@ -26,6 +26,16 @@ export PREFIX=/home/pi/webview_build/
 
 Besides, you need to copy `res` folder to `/usr/local/bin/ScreenlyWebview/res`
 
+
+To prepare for a release, use the docker container:
+
+```
+$ docker run --rm \
+    -e VERSION=*version* \
+    -v $(pwd):/Screenly-webview \
+    screenly/screenly-webview-build
+```
+
 ## Usage
 
 DBus is used for communication.
