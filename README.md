@@ -1,5 +1,7 @@
 # ScreenlyOSE-WebView
 
+[![Build Status](https://travis-ci.org/Screenly/ScreenlyOSE-WebView.svg?branch=master)](https://travis-ci.org/Screenly/ScreenlyOSE-WebView)
+
 ## Building
 
 Before building, you need to install the following packages:
