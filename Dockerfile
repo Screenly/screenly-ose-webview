@@ -1,4 +1,4 @@
-FROM raspbian/stretch
+FROM resin/rpi-raspbian:stretch
 MAINTAINER Anton Molodykh <amolodykh@screenly.io>
 
 RUN apt-get update && \
