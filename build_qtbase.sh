@@ -21,4 +21,5 @@ fi
 make -j 4
 make install
 cp -r /usr/share/fonts/truetype/dejavu/ $QT_FOLDER/qt5pi/lib/fonts
-tar -zcvf /home/pi/qtbase.tar.gz $QT_FOLDER/qt5pi
+cd $QT_FOLDER
+tar -zcvf /home/pi/qtbase.tar.gz qt5pi
