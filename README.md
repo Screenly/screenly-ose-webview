@@ -1,6 +1,6 @@
 # ScreenlyOSE-WebView
 
-[![Build Status](https://travis-ci.org/Screenly/ScreenlyOSE-WebView.svg?branch=master)](https://travis-ci.org/Screenly/ScreenlyOSE-WebView)
+[![Build Status](https://travis-ci.org/Screenly/screenly-ose-webview.svg?branch=master)](https://travis-ci.org/Screenly/screenly-ose-webview)
 
 ## Building
 
