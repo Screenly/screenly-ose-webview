@@ -3,6 +3,7 @@
 #include <QWebView>
 #include <QWebPage>
 #include <QWidget>
+#include <QEventLoop>
 
 class View : public QWebView
 {
@@ -16,4 +17,7 @@ public:
 
 private slots:
     void handleAuthRequest(QNetworkReply*, QAuthenticator*);
+private:
+    QWebPage* pre_loader;
+    QEventLoop pre_loader_loop;
 };
