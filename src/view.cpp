@@ -2,6 +2,9 @@
 #include <QFileInfo>
 #include <QUrl>
 #include <QStandardPaths>
+#include <QWebFrame>
+#include <QEventLoop>
+#include <QTimer>
 
 #include "view.h"
 
@@ -11,6 +14,7 @@ View::View(QWidget* parent) : QWebView(parent)
     // Need to convert this to a new syntax
     connect(QWebView::page()->networkAccessManager(), SIGNAL(authenticationRequired(QNetworkReply*,QAuthenticator*)),
             this, SLOT(handleAuthRequest(QNetworkReply*,QAuthenticator*)));
+    pre_loader = new QWebPage;
 }
 
 void View::loadPage(const QString &uri)
@@ -41,12 +45,16 @@ void View::loadImage(const QString &preUri)
         uri = preUri;
     }
 
-    QString script = "window.setimg=function(n){var o=new Image;o.onload=function()"
-                     "{document.body.style.backgroundSize=o.width>window.innerWidth||o.height>window.innerHeight?\"contain\":\"auto\",document.body.style.backgroundImage=\"url(\"+n+\")\"},o.src=n};";
+    QString script = "window.setimg=function(n){var o=new Image;"
+                     "document.body.style.backgroundSize=o.width>window.innerWidth||o.height>window.innerHeight?\"contain\":\"auto\",document.body.style.backgroundImage=\"url(\"+n+\")\",o.src=n};";
     QString styles = "background: #000 center no-repeat";
 
     stop();
-    setHtml("<html><head><script>" + script + "</script></head><body onload='window.setimg(\"" + uri + "\");' style='" + styles + "'></body></html>");
+    pre_loader->currentFrame()->setHtml("<html><head><script>" + script + "</script></head><body style='" + styles + "'><script>window.setimg(\"" + uri + "\");</script></body></html>");
+    connect(pre_loader,SIGNAL(loadFinished(bool)),&pre_loader_loop,SLOT(quit()));
+    QTimer::singleShot(5000, &pre_loader_loop, SLOT(quit()));
+    pre_loader_loop.exec();
+    setHtml(pre_loader->currentFrame()->toHtml());
 }
 
 void View::handleAuthRequest(QNetworkReply* reply, QAuthenticator* auth)
