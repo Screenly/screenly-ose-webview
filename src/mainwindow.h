@@ -2,6 +2,7 @@
 
 #include <QMainWindow>
 #include <QWebView>
+#include <QNetworkDiskCache>
 
 #include "view.h"
 
@@ -17,5 +18,8 @@ public slots:
     void loadImage(const QString &uri);
 
 private:
+    QString cacheLocation;
+    QNetworkAccessManager* manager;
+    QNetworkDiskCache* diskCache;
     View *view;
 };
