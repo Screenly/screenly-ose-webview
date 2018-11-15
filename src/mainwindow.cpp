@@ -1,5 +1,6 @@
-#include <QWebFrame>
+#include <QNetworkDiskCache>
 #include <QStandardPaths>
+#include <QWebFrame>
 
 #include "mainwindow.h"
 #include "view.h"
@@ -9,9 +10,9 @@ MainWindow::MainWindow() : QMainWindow()
 {
     QWebSettings::globalSettings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
 
-    manager = new QNetworkAccessManager(this);
-    diskCache = new QNetworkDiskCache(this);
-    cacheLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
+    QNetworkAccessManager* manager = new QNetworkAccessManager(this);
+    QNetworkDiskCache* diskCache = new QNetworkDiskCache(this);
+    QString cacheLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation);
 
     diskCache->setCacheDirectory(cacheLocation);
     manager->setCache(diskCache);
@@ -19,7 +20,6 @@ MainWindow::MainWindow() : QMainWindow()
 
     view = new View(this);
     view -> page()->setNetworkAccessManager(manager);
-    view -> page()->settings()->setMaximumPagesInCache(1);
     view -> page()->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
     view -> page()->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
     setCentralWidget(view);
