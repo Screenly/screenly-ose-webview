@@ -45,8 +45,8 @@ void View::loadImage(const QString &preUri)
         uri = preUri;
     }
 
-    QString script = "window.setimg=function(n){var o=new Image;"
-                     "document.body.style.backgroundSize=o.width>window.innerWidth||o.height>window.innerHeight?\"contain\":\"auto\",document.body.style.backgroundImage=\"url(\"+n+\")\",o.src=n};";
+    QString script = "window.setimg=function(n){var o=new Image;o.onload=function()"
+                     "{document.body.style.backgroundSize=o.width>window.innerWidth||o.height>window.innerHeight?\"contain\":\"auto\",document.body.style.backgroundImage=\"url(\"+n+\")\"},o.src=n};";
     QString styles = "background: #000 center no-repeat";
 
     stop();
