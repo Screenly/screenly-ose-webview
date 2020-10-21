@@ -8,7 +8,7 @@ Before building, you need to install the following packages:
 
 ```
 libqt5webkit5-dev
-gstreamer0.10-plugins-good
+gstreamer1.0-plugins-good
 libdbus-glib-1-dev
 ```
 
@@ -41,7 +41,7 @@ $ docker run --rm \
 ## Usage
 
 DBus is used for communication.
-Webview registers `screenly.webvew` object at `/Screenly` address on the session bus.
+Webview registers `screenly.webview` object at `/Screenly` address on the session bus.
 
 Webview provides 2 methods:`loadPage` and `loadImage`.
 
