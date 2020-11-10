@@ -24,5 +24,12 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/arm/v6,linux/arm/v7 \
-            --output "type=image,push=false" \
+            -t "screenly-ose-webview-builder" \
+            --output "type=image,push=false,load=true" \
             --file Dockerfile .
+      -
+        name: Run webviewer build
+        run: |
+          docker run \
+            -v $(pwd):/build \
+            screenly-ose-webview-builder build.sh

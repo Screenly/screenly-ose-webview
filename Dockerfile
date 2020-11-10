@@ -23,6 +23,3 @@ RUN mkdir /src
 COPY build_qtbase.sh /usr/local/bin/
 COPY build.sh /usr/local/bin/
 COPY . /src
-
-RUN build_qtbase.sh
-RUN build.sh
