@@ -9,9 +9,11 @@ QT_PI_1=/src/qt5/pi_1 # For Pi 1 and Pi Zero
 QT_PI_2=/src/qt5/pi_2 # For Pi 2
 QT_PI_3=/src/qt5/pi_3 # For Pi 3
 BUILD_TARGET=/build
-QT_BRANCH="5.9"
+QT_BRANCH="5.15"
 
 mkdir -p "$BUILD_TARGET"
+
+echo "Building QT Base version $QT_BRANCH."
 
 # For ARMv6
 if [ "$(arch)" = "armv6l" ]; then
