@@ -2,24 +2,34 @@
 
 ## Building
 
-You can build the release locally by running:
+The build process depends on cross compiling on Docker. You may need to enable the `buildx` functionality.
 
-
-
-To prepare for a release, use the docker container:
-
+Build the docker container:
 ```
 $ docker buildx build \
-    --platform linux/arm/v7 \
-    -t screenly/screenly-webview-build .
+    --platform linux/arm/v6,linux/arm/v7 \
+    --load \
+    -t screenly/screenly-webview-build \
+    -f Dockerfile .
 ```
 
+Build the actual web view
 ```
 $ docker run --rm \
-    -e VERSION=*version* \
-    -v $(pwd):/Screenly-webview \
+    -v $(pwd):/build \
     screenly/screenly-webview-build
+    build.sh
 ```
+
+Build out the QT Base
+```
+$ docker run --rm \
+    -v $(pwd):/build \
+    screenly/screenly-webview-build
+    build_qtbase.sh
+```
+
+Note that this is done automatically on GitHub Actions, so there is usually no need to build this locally.
 
 ## Usage
 
