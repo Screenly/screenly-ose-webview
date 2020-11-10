@@ -1,35 +1,18 @@
-# ScreenlyOSE-WebView
-
-[![Build Status](https://travis-ci.org/Screenly/screenly-ose-webview.svg?branch=master)](https://travis-ci.org/Screenly/screenly-ose-webview)
+# Screenly OSE WebView
 
 ## Building
 
-Before building, you need to install the following packages:
+You can build the release locally by running:
 
-```
-libqt5webkit5-dev
-gstreamer1.0-plugins-good
-libdbus-glib-1-dev
-```
-
-Building:
-
-```
-qmake
-make
-make install
-```
-
-You can change the folder to build:
-
-```
-export PREFIX=/home/pi/webview_build/
-```
-
-Besides, you need to copy `res` folder to `/usr/local/bin/ScreenlyWebview/res`
 
 
 To prepare for a release, use the docker container:
+
+```
+$ docker buildx build \
+    --platform linux/arm/v7 \
+    -t screenly/screenly-webview-build .
+```
 
 ```
 $ docker run --rm \

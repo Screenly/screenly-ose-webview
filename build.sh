@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/bin/bash -ex
 
+cd /src
 /usr/lib/arm-linux-gnueabihf/qt5/bin/qmake
-make
+make -j "$(nproc --all)"
 make install
-tar -zcvf "screenly-webview-${VERSION}.tar.gz" res ScreenlyWebview
+
+tar -zcvf "/build/screenly-webview.tar.gz" res ScreenlyWebview
