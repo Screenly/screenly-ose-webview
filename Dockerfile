@@ -2,7 +2,7 @@ FROM balenalib/rpi-raspbian:buster
 
 RUN sed -i -e 's/#deb-src/deb-src/' /etc/apt/sources.list
 RUN apt-get update && \
-    apt-get -y install \
+    apt-get -y install --no-install-recommends \
         build-essential \
         g++ \
         git \
