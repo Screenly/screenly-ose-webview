@@ -9,7 +9,7 @@ QT_PI_1=/src/qt5/pi_1 # For Pi 1 and Pi Zero
 QT_PI_2=/src/qt5/pi_2 # For Pi 2
 QT_PI_3=/src/qt5/pi_3 # For Pi 3
 BUILD_TARGET=/build
-QT_BRANCH="5.15"
+QT_BRANCH="5.12"
 
 mkdir -p "$BUILD_TARGET"
 
@@ -41,7 +41,7 @@ if [ "$(arch)" = "armv6l" ]; then
         cd "$QT_PI_1"
         tar -zcvf $BUILD_TARGET/qtbase-pi1.tar.gz qt5pi
         cd "$BUILD_TARGET"
-        md5sum qtbase-pi1.tar.gz > qtbase-pi1.tar.gz.md5
+        sha256sum qtbase-pi1.tar.gz > qtbase-pi1.tar.gz.sha256
     fi
 
 fi
@@ -55,6 +55,11 @@ if [ "$(arch)" = "armv7l" ]; then
         cd "$QT_PI_2"
         git clone git://code.qt.io/qt/qtbase.git -b "$QT_BRANCH"
         cd qtbase
+
+        # Patch QT as per https://mechatronicsblog.com/cross-compile-and-deploy-qt-5-12-for-raspberry-pi/
+        sed -i 's/-lEGL/-lbrcmEGL/' mkspecs/devices/linux-rasp-pi2-g++/qmake.conf
+        sed -i 's/-lGLESv2/-lbrcmGLESv2/' mkspecs/devices/linux-rasp-pi2-g++/qmake.conf
+
         ./configure \
             -release \
             -opengl es2 \
@@ -73,7 +78,7 @@ if [ "$(arch)" = "armv7l" ]; then
         cd "$QT_PI_2"
         tar -zcvf "$BUILD_TARGET/qtbase-pi2.tar.gz" qt5pi
         cd "$BUILD_TARGET"
-        md5sum qtbase-pi2.tar.gz > qtbase-pi2.tar.gz.md5
+        sha256sum qtbase-pi2.tar.gz > qtbase-pi2.tar.gz.sha256
     fi
 
     if [ ! -f "$BUILD_TARGET/qtbase-pi3.tar.gz" ]; then
@@ -101,6 +106,6 @@ if [ "$(arch)" = "armv7l" ]; then
         cd "$QT_PI_3"
         tar -zcvf "$BUILD_TARGET/qtbase-pi3.tar.gz" qt5pi
         cd "$BUILD_TARGET"
-        md5sum qtbase-pi3.tar.gz > qtbase-pi3.tar.gz.md5
+        sha256sum qtbase-pi3.tar.gz > qtbase-pi3.tar.gz.sha256
     fi
 fi

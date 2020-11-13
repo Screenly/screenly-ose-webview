@@ -14,6 +14,7 @@ RUN apt-get update && \
         libqt5webkit5-dev \
         libqt5x11extras5-dev \
         libraspberrypi0 \
+        libraspberrypi-dev \
         libts-dev \
         libudev-dev \
         libxcb-xinerama0 \
