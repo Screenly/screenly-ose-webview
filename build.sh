@@ -1,6 +1,12 @@
 #!/bin/bash
 
+# vim: tabstop=4 shiftwidth=4 softtabstop=4
+# -*- sh-basic-offset: 4 -*-
+set -euo pipefail
+
+cd /src
 /usr/lib/arm-linux-gnueabihf/qt5/bin/qmake
-make
+make -j "$(nproc --all)"
 make install
-tar -zcvf "screenly-webview-${VERSION}.tar.gz" res ScreenlyWebview
+
+tar -zcvf "/build/screenly-webview.tar.gz" res ScreenlyWebview
